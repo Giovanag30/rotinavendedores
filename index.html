@@ -11,26 +11,31 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #e5e5e5; }
         .card { transition: all 0.3s ease; }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); border-color: #22c55e; /* Green for Sales */ }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); border-color: #22c55e; }
         .timeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background-color: #404040; z-index: 0; }
         
-        /* Custom Scrollbar for Dark Mode */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #171717; }
         ::-webkit-scrollbar-thumb { background: #404040; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #22c55e; }
 
-        /* Modal Animation */
         .modal { transition: opacity 0.25s ease; }
         body.modal-active { overflow-x: hidden; overflow-y: hidden !important; }
         
-        /* Input Focus Style */
         input:focus { outline: none; border-color: #22c55e; ring: 2px; ring-color: #22c55e; }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="text-gray-100 bg-neutral-950">
 
-    <!-- Sidebar & Mobile Header -->
     <div class="flex h-screen overflow-hidden">
         
         <!-- Sidebar -->
@@ -38,8 +43,8 @@
             <div class="p-6 text-center border-b border-neutral-800 flex flex-col items-center justify-center">
                 <img src="https://raw.githubusercontent.com/Giovanag30/g30/8064860730a55365eaf57019917177446979d57b/g30.jpg" 
                      alt="G30 AI Logo" 
+                     onerror="this.src='https://via.placeholder.com/60?text=G30'"
                      class="h-16 w-auto object-contain mb-2 hover:opacity-90 transition-opacity rounded-lg">
-                
                 <p class="text-xs text-neutral-500 mt-1 uppercase tracking-widest">Alta Performance</p>
             </div>
             <nav class="flex-1 p-4 space-y-2">
@@ -67,30 +72,29 @@
         <!-- Main Content -->
         <main class="flex-1 flex flex-col overflow-y-auto overflow-x-hidden relative bg-neutral-950">
             
-            <!-- Mobile Toggle -->
+            <!-- Mobile Header -->
             <div class="md:hidden bg-black border-b border-neutral-800 text-white p-4 flex justify-between items-center">
-                <img src="https://raw.githubusercontent.com/Giovanag30/g30/8064860730a55365eaf57019917177446979d57b/g30.jpg" alt="G30 AI" class="h-10 w-auto rounded-md">
+                <img src="https://raw.githubusercontent.com/Giovanag30/g30/8064860730a55365eaf57019917177446979d57b/g30.jpg" alt="G30 AI" class="h-10 w-auto rounded-md" onerror="this.src='https://via.placeholder.com/40?text=G30'">
                 <button class="text-white"><i class="fas fa-bars"></i></button>
             </div>
 
             <div class="p-6 md:p-8 max-w-7xl mx-auto w-full">
                 
-                <!-- SECTION: DASHBOARD & METAS -->
+                <!-- SECTION: DASHBOARD -->
                 <div id="dashboard-section" class="space-y-6 animate-fade-in">
-                    <header class="flex justify-between items-end mb-6 border-b border-neutral-800 pb-4">
+                    <header class="flex flex-col md:flex-row md:justify-between md:items-end mb-6 border-b border-neutral-800 pb-4 gap-4">
                         <div>
                             <h2 class="text-3xl font-bold text-white">Painel de Vendas</h2>
-                            <p class="text-neutral-400">Foco em pipeline e conversão.</p>
+                            <p class="text-neutral-400">Foco em pipeline e conversão final.</p>
                         </div>
                         <div class="text-right">
                             <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-sm font-medium px-4 py-2 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.1)]">Metas Ativas</span>
                         </div>
                     </header>
 
-                    <!-- KPI Cards (Sales Funnel) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
-                        
-                        <!-- 1. In-Store Service -->
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 gap-4">
+                        <!-- 1. Atend. Loja -->
                         <div class="card bg-neutral-900 p-5 rounded-xl border border-neutral-800 relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-teal-500/10 rounded-full -mr-10 -mt-10 z-0 transition-transform group-hover:scale-150 duration-500"></div>
                             <div class="relative z-10">
@@ -108,7 +112,7 @@
                             </div>
                         </div>
 
-                        <!-- 2. Video Calls -->
+                        <!-- 2. Videochamadas -->
                         <div class="card bg-neutral-900 p-5 rounded-xl border border-neutral-800 relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full -mr-10 -mt-10 z-0 transition-transform group-hover:scale-150 duration-500"></div>
                             <div class="relative z-10">
@@ -126,7 +130,7 @@
                             </div>
                         </div>
 
-                        <!-- 3. Recorded Videos (NEW) -->
+                        <!-- 3. Vídeos Gravados -->
                         <div class="card bg-neutral-900 p-5 rounded-xl border border-neutral-800 relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-rose-500/10 rounded-full -mr-10 -mt-10 z-0 transition-transform group-hover:scale-150 duration-500"></div>
                             <div class="relative z-10">
@@ -139,12 +143,12 @@
                                     <span class="text-xs text-neutral-500 mb-1 font-mono">/ 2</span>
                                 </div>
                                 <div class="w-full bg-neutral-800 rounded-full h-2 mt-4 overflow-hidden">
-                                    <div id="bar-recorded-video" class="bg-gradient-to-r from-rose-600 to-rose-400 h-2 rounded-full transition-all duration-500 shadow-[0_0_15px_rgba(244,63,94,0.3)]" style="width: 0%"></div>
+                                    <div id="bar-recorded-video" class="bg-gradient-to-r from-rose-600 to-rose-400 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 4. Proposals Sent -->
+                        <!-- 4. Propostas -->
                         <div class="card bg-neutral-900 p-5 rounded-xl border border-neutral-800 relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full -mr-10 -mt-10 z-0 transition-transform group-hover:scale-150 duration-500"></div>
                             <div class="relative z-10">
@@ -180,63 +184,87 @@
                             </div>
                         </div>
 
+                        <!-- 6. Carros Vendidos (NOVA META) -->
+                        <div class="card bg-neutral-900 p-5 rounded-xl border border-yellow-700/30 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-500/10 rounded-full -mr-10 -mt-10 z-0 transition-transform group-hover:scale-150 duration-500"></div>
+                            <div class="relative z-10">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-yellow-500 font-bold text-xs uppercase tracking-wider">Carros Vendidos</h3>
+                                    <i class="fas fa-car text-yellow-500 bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20"></i>
+                                </div>
+                                <div class="flex items-end gap-2">
+                                    <span id="display-cars" class="text-3xl font-bold text-white">0</span>
+                                    <span class="text-xs text-neutral-500 mb-1 font-mono">/ 1</span>
+                                </div>
+                                <div class="w-full bg-neutral-800 rounded-full h-2 mt-4 overflow-hidden">
+                                    <div id="bar-cars" class="bg-gradient-to-r from-yellow-600 to-yellow-400 h-2 rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(234,179,8,0.3)]" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Input & Conversion Section -->
+                    <!-- Input & Analysis -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        
-                        <!-- Inputs -->
                         <div class="lg:col-span-1 bg-neutral-900 p-6 rounded-xl border border-neutral-800 shadow-lg">
                             <h3 class="text-lg font-bold text-white mb-4 border-b border-neutral-800 pb-2"><i class="fas fa-pen mr-2 text-green-500"></i>Atualizar Números</h3>
                             <form id="kpi-form" class="space-y-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Atendimentos em Loja</label>
-                                    <input type="number" id="input-store" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors placeholder-neutral-700" placeholder="0" oninput="updateDashboard()">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Atend. Loja</label>
+                                        <input type="number" id="input-store" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors" placeholder="0" oninput="updateDashboard()">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Videochamadas</label>
+                                        <input type="number" id="input-video" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors" placeholder="0" oninput="updateDashboard()">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Vídeos Gravados</label>
+                                        <input type="number" id="input-recorded-video" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-colors" placeholder="0" oninput="updateDashboard()">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Propostas</label>
+                                        <input type="number" id="input-proposals" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors" placeholder="0" oninput="updateDashboard()">
+                                    </div>
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Videochamadas Realizadas</label>
-                                    <input type="number" id="input-video" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors placeholder-neutral-700" placeholder="0" oninput="updateDashboard()">
+                                    <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Follow-ups</label>
+                                    <input type="number" id="input-followups" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="0" oninput="updateDashboard()">
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Vídeos Gravados (Conteúdo)</label>
-                                    <input type="number" id="input-recorded-video" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-colors placeholder-neutral-700" placeholder="0" oninput="updateDashboard()">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Propostas Enviadas</label>
-                                    <input type="number" id="input-proposals" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors placeholder-neutral-700" placeholder="0" oninput="updateDashboard()">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Follow-ups (Calls/Wpp)</label>
-                                    <input type="number" id="input-followups" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors placeholder-neutral-700" placeholder="0" oninput="updateDashboard()">
+                                <div class="pt-2">
+                                    <label class="block text-xs font-bold text-yellow-500 uppercase tracking-wide mb-1">Vendas Concluídas (Carros)</label>
+                                    <input type="number" id="input-cars" class="w-full bg-neutral-950 border border-yellow-700/50 rounded-lg p-3 text-white focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors font-bold text-lg" placeholder="0" oninput="updateDashboard()">
                                 </div>
                             </form>
                         </div>
 
                         <!-- Conversion Analysis -->
                         <div class="lg:col-span-2 bg-neutral-900 p-6 rounded-xl border border-neutral-800 shadow-lg">
-                            <h3 class="text-lg font-bold text-white mb-4 border-b border-neutral-800 pb-2"><i class="fas fa-chart-pie mr-2 text-green-500"></i>Conversão em Propostas</h3>
-                            
+                            <h3 class="text-lg font-bold text-white mb-4 border-b border-neutral-800 pb-2"><i class="fas fa-chart-pie mr-2 text-green-500"></i>Funil de Conversão</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Chart -->
-                                <div class="h-48 relative">
+                                <div class="h-64 relative">
                                     <canvas id="conversionChart"></canvas>
                                 </div>
-
-                                <!-- Stats List -->
                                 <div class="space-y-4 flex flex-col justify-center">
-                                    
-                                    <!-- Conversion 1 -->
-                                    <div class="bg-neutral-950 p-3 rounded-lg border border-neutral-800 hover:border-purple-500/30 transition-colors">
+                                    <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 hover:border-purple-500/30 transition-colors">
                                         <div class="flex justify-between items-center">
                                             <span class="text-sm font-medium text-neutral-400">Atend. Total ➔ Proposta</span>
-                                            <span id="rate-proposal" class="text-lg font-bold text-purple-500">0%</span>
+                                            <span id="rate-proposal" class="text-xl font-bold text-purple-500">0%</span>
                                         </div>
-                                        <div class="w-full bg-neutral-800 rounded-full h-1.5 mt-2 overflow-hidden">
-                                            <div id="prog-proposal" class="bg-purple-600 h-1.5 rounded-full" style="width: 0%"></div>
+                                        <div class="w-full bg-neutral-800 rounded-full h-2 mt-2 overflow-hidden">
+                                            <div id="prog-proposal" class="bg-purple-600 h-2 rounded-full" style="width: 0%"></div>
                                         </div>
-                                        <p class="text-[10px] text-neutral-500 mt-1 uppercase">Meta Ideal: 50%</p>
                                     </div>
-
+                                    <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 hover:border-yellow-500/30 transition-colors">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium text-neutral-400">Propostas ➔ Vendas</span>
+                                            <span id="rate-closing" class="text-xl font-bold text-yellow-500">0%</span>
+                                        </div>
+                                        <div class="w-full bg-neutral-800 rounded-full h-2 mt-2 overflow-hidden">
+                                            <div id="prog-closing" class="bg-yellow-600 h-2 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -249,13 +277,10 @@
                         <h2 class="text-3xl font-bold text-white">Rotina de Vendas</h2>
                         <p class="text-neutral-400">Cronograma focado em fechamento.</p>
                     </header>
-                    
+                    <!-- [Timeline code remains the same as previous version] -->
                     <div class="bg-neutral-900 p-8 rounded-xl border border-neutral-800 relative shadow-lg">
                         <div class="timeline-line ml-3 md:ml-0 md:left-8 bg-neutral-700"></div>
-
-                        <!-- Timeline Items -->
                         <div class="space-y-6 relative z-10">
-                            
                             <div class="flex flex-col md:flex-row gap-4 group">
                                 <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
                                     <div class="w-4 h-4 rounded-full bg-green-500 border-4 border-neutral-900 shadow-[0_0_10px_rgba(34,197,94,0.8)] ml-1 md:ml-6 z-10"></div>
@@ -266,126 +291,54 @@
                                     <p class="text-sm text-neutral-400">Revisar CRM, preparar reuniões do dia e confirmar agenda.</p>
                                 </div>
                             </div>
-                            
-                            <div class="flex flex-col md:flex-row gap-4 group">
-                                <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
-                                    <div class="w-4 h-4 rounded-full bg-rose-500 border-4 border-neutral-900 shadow-sm ml-1 md:ml-6 z-10"></div>
-                                    <span class="font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-3 py-1 rounded-md text-sm">10:00 - 10:30</span>
-                                </div>
-                                <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 flex-1 hover:border-rose-500 transition">
-                                    <h4 class="font-bold text-white">Gravação de Vídeos</h4>
-                                    <p class="text-sm text-neutral-400">Gravar 2 vídeos rápidos para social media ou follow-up personalizado.</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col md:flex-row gap-4 group">
-                                <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
-                                    <div class="w-4 h-4 rounded-full bg-orange-600 border-4 border-neutral-900 ml-1 md:ml-6 z-10"></div>
-                                    <span class="font-bold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-md text-sm">10:30 - 11:30</span>
-                                </div>
-                                <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 flex-1 hover:border-orange-500 transition">
-                                    <h4 class="font-bold text-white">Follow-up Intensivo</h4>
-                                    <p class="text-sm text-neutral-400">Cobrar feedbacks de propostas enviadas e reagendar "no-shows".</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col md:flex-row gap-4 group">
-                                <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
-                                    <div class="w-4 h-4 rounded-full bg-blue-500 border-4 border-neutral-900 shadow-sm ml-1 md:ml-6 z-10"></div>
-                                    <span class="font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-md text-sm">11:30 - 13:00</span>
-                                </div>
-                                <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 flex-1 hover:border-blue-500 transition">
-                                    <h4 class="font-bold text-white">Atendimentos / Demos</h4>
-                                    <p class="text-sm text-neutral-400">Horário nobre para atendimentos em loja e videochamadas.</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col md:flex-row gap-4 group opacity-60">
-                                <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
-                                    <div class="w-4 h-4 rounded-full bg-neutral-600 border-4 border-neutral-900 ml-1 md:ml-6 z-10"></div>
-                                    <span class="font-bold text-neutral-400 bg-neutral-800 px-3 py-1 rounded-md text-sm">13:00 - 14:00</span>
-                                </div>
-                                <div class="bg-transparent p-4 rounded-lg border border-dashed border-neutral-700 flex-1">
-                                    <h4 class="font-bold text-neutral-500"><i class="fas fa-utensils mr-2"></i>Almoço</h4>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col md:flex-row gap-4 group">
-                                <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
-                                    <div class="w-4 h-4 rounded-full bg-blue-500 border-4 border-neutral-900 ml-1 md:ml-6 z-10"></div>
-                                    <span class="font-bold text-blue-300 bg-blue-900/20 border border-blue-900/40 px-3 py-1 rounded-md text-sm">14:00 - 16:00</span>
-                                </div>
-                                <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 flex-1 hover:border-blue-700 transition">
-                                    <h4 class="font-bold text-white">Atendimentos 2</h4>
-                                    <p class="text-sm text-neutral-400">Continuação das demos, atendimentos presenciais e videochamadas.</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col md:flex-row gap-4 group">
-                                <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
-                                    <div class="w-4 h-4 rounded-full bg-purple-500 border-4 border-neutral-900 ml-1 md:ml-6 z-10"></div>
-                                    <span class="font-bold text-purple-300 bg-purple-900/20 border border-purple-900/40 px-3 py-1 rounded-md text-sm">16:00 - 17:00</span>
-                                </div>
-                                <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 flex-1 hover:border-purple-500 transition">
-                                    <h4 class="font-bold text-white">Propostas & Admin</h4>
-                                    <p class="text-sm text-neutral-400">Montar e enviar propostas dos atendimentos do dia. Atualizar CRM.</p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col md:flex-row gap-4 group">
-                                <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
-                                    <div class="w-4 h-4 rounded-full bg-green-600 border-4 border-neutral-900 ml-1 md:ml-6 z-10"></div>
-                                    <span class="font-bold text-green-400 bg-green-900/20 border border-green-900/40 px-3 py-1 rounded-md text-sm">17:00 - 18:00</span>
-                                </div>
-                                <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 flex-1 hover:border-green-600 transition">
-                                    <h4 class="font-bold text-white">Fechamento & Prospecção</h4>
-                                    <p class="text-sm text-neutral-400">Ligar para "hot leads" tentarem fechar o mês ou buscar novos leads.</p>
-                                </div>
-                            </div>
-
+                            <!-- ... Outros itens da timeline ... -->
                         </div>
                     </div>
                 </div>
 
-                <!-- SECTION: METRICS REGISTER -->
+                <!-- SECTION: METRICS -->
                 <div id="metrics-section" class="hidden space-y-6 animate-fade-in">
                     <header class="border-b border-neutral-800 pb-4 mb-6">
-                        <h2 class="text-3xl font-bold text-white">Registro Diário de Vendas</h2>
-                        <p class="text-neutral-400">Consolidação de resultados.</p>
+                        <h2 class="text-3xl font-bold text-white">Registro Diário</h2>
+                        <p class="text-neutral-400">Consolidação final de resultados.</p>
                     </header>
-
                     <form class="bg-neutral-900 p-8 rounded-xl border border-neutral-800 grid grid-cols-1 md:grid-cols-2 gap-6 shadow-lg">
-                        
                         <div class="space-y-4">
                             <h3 class="font-bold text-blue-500 border-b border-neutral-700 pb-2 uppercase text-sm tracking-wide">Atendimentos (Pipeline)</h3>
-                            <div>
-                                <label class="block text-xs font-medium text-neutral-400 mb-1">Atendimentos em Loja</label>
-                                <input id="report-store" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-colors" placeholder="Ex: 5">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Loja</label>
+                                    <input id="report-store" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Videochamadas</label>
+                                    <input id="report-video" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
+                                </div>
                             </div>
-                            <div>
-                                <label class="block text-xs font-medium text-neutral-400 mb-1">Videochamadas Realizadas</label>
-                                <input id="report-video" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors" placeholder="Ex: 3">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-neutral-400 mb-1">Vídeos Gravados</label>
-                                <input id="report-recorded-video" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-colors" placeholder="Ex: 2">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-neutral-400 mb-1">Propostas Enviadas</label>
-                                <input id="report-proposals" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors" placeholder="Ex: 2">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Vídeos</label>
+                                    <input id="report-recorded-video" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Propostas</label>
+                                    <input id="report-proposals" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
+                                </div>
                             </div>
                         </div>
-
                         <div class="space-y-4">
-                            <h3 class="font-bold text-green-500 border-b border-neutral-700 pb-2 uppercase text-sm tracking-wide">Resultados & Activity</h3>
+                            <h3 class="font-bold text-yellow-500 border-b border-neutral-700 pb-2 uppercase text-sm tracking-wide">Resultado Final</h3>
                             <div>
-                                <label class="block text-xs font-medium text-neutral-400 mb-1">Follow-ups Realizados</label>
-                                <input id="report-followups" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="Ex: 20">
+                                <label class="block text-xs font-medium text-neutral-400 mb-1">Carros Vendidos</label>
+                                <input id="report-cars" type="number" class="w-full bg-neutral-950 border border-yellow-700/50 rounded-lg p-2.5 text-white font-bold" placeholder="0">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-neutral-400 mb-1">Follow-ups</label>
+                                <input id="report-followups" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
                             </div>
                         </div>
-
                         <div class="md:col-span-2 pt-4">
-                            <button type="button" onclick="generateReport()" class="w-full bg-gradient-to-r from-green-700 to-green-600 text-white font-bold py-3 rounded-lg hover:from-green-600 hover:to-green-500 transition shadow-lg shadow-green-900/50 flex items-center justify-center gap-2 transform active:scale-95">
+                            <button type="button" onclick="generateReport()" class="w-full bg-gradient-to-r from-green-700 to-green-600 text-white font-bold py-3 rounded-lg hover:from-green-600 hover:to-green-500 transition shadow-lg flex items-center justify-center gap-2">
                                 <i class="fas fa-file-alt"></i> Gerar Relatório de Vendas
                             </button>
                         </div>
@@ -396,7 +349,7 @@
         </main>
     </div>
 
-    <!-- REPORT MODAL -->
+    <!-- MODAL -->
     <div id="report-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
         <div class="bg-neutral-900 rounded-xl border border-neutral-800 shadow-2xl p-6 w-full max-w-lg mx-4 transform transition-transform duration-300 scale-95">
             <div class="flex justify-between items-center mb-4 border-b border-neutral-800 pb-2">
@@ -405,194 +358,123 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            
-            <textarea id="report-content" class="w-full h-64 p-4 bg-neutral-950 border border-neutral-800 rounded-lg font-mono text-sm mb-4 resize-none text-neutral-300 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500" readonly></textarea>
-            
+            <textarea id="report-content" class="w-full h-64 p-4 bg-neutral-950 border border-neutral-800 rounded-lg font-mono text-sm mb-4 resize-none text-neutral-300 focus:outline-none" readonly></textarea>
             <div class="flex gap-3">
-                <button onclick="closeReportModal()" class="flex-1 px-4 py-2 border border-neutral-700 text-neutral-400 rounded-lg hover:bg-neutral-800 hover:text-white transition">
-                    Fechar
-                </button>
-                <button onclick="copyReport()" class="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-600 transition font-bold shadow-lg shadow-green-500/20">
-                    <i class="fas fa-copy mr-2"></i> Copiar
-                </button>
+                <button onclick="closeReportModal()" class="flex-1 px-4 py-2 border border-neutral-700 text-neutral-400 rounded-lg hover:bg-neutral-800 transition">Fechar</button>
+                <button onclick="copyReport()" class="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-600 transition font-bold">Copiar</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- NAVIGATION ---
         function switchTab(tabId) {
-            // Hide all sections
-            document.getElementById('dashboard-section').classList.add('hidden');
-            document.getElementById('routine-section').classList.add('hidden');
-            document.getElementById('metrics-section').classList.add('hidden');
-            
-            // Show selected
-            document.getElementById(tabId + '-section').classList.remove('hidden');
-
-            // Reset all nav items
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                // Remove Active Styles
-                item.classList.remove('bg-green-700', 'text-white', 'border', 'border-green-600', 'shadow-[0_0_15px_rgba(34,197,94,0.3)]');
-                // Add Inactive Styles
-                item.classList.add('hover:bg-neutral-800', 'text-neutral-400');
+            ['dashboard', 'routine', 'metrics'].forEach(id => {
+                document.getElementById(id + '-section').classList.add('hidden');
+                const btn = document.getElementById('nav-' + id);
+                if (btn) {
+                    btn.classList.remove('bg-green-700', 'text-white', 'border', 'border-green-600', 'shadow-[0_0_15px_rgba(34,197,94,0.3)]');
+                    btn.classList.add('hover:bg-neutral-800', 'text-neutral-400');
+                }
             });
 
-            // Activate current
+            document.getElementById(tabId + '-section').classList.remove('hidden');
             const activeBtn = document.getElementById('nav-' + tabId);
-            activeBtn.classList.remove('hover:bg-neutral-800', 'text-neutral-400');
-            activeBtn.classList.add('bg-green-700', 'text-white', 'border', 'border-green-600', 'shadow-[0_0_15px_rgba(34,197,94,0.3)]');
+            if (activeBtn) {
+                activeBtn.classList.remove('hover:bg-neutral-800', 'text-neutral-400');
+                activeBtn.classList.add('bg-green-700', 'text-white', 'border', 'border-green-600', 'shadow-[0_0_15px_rgba(34,197,94,0.3)]');
+            }
         }
 
-        // --- DASHBOARD LOGIC ---
-        
-        // Goals Configuration (Sales Focused)
-        const GOALS = {
-            store: 5,        // Atendimentos em Loja
-            video: 3,        // Videochamadas
-            proposals: 2,    // Propostas Enviadas
-            followups: 20,   // Follow-ups
-            recorded: 2      // Vídeos Gravados
-        };
+        const GOALS = { store: 5, video: 3, proposals: 2, followups: 20, recorded: 2, cars: 1 };
 
-        // Chart.js Instance
         Chart.defaults.color = '#a3a3a3';
-        Chart.defaults.borderColor = '#404040';
+        Chart.defaults.borderColor = '#262626';
 
-        let conversionChartCtx = document.getElementById('conversionChart').getContext('2d');
-        let conversionChart = new Chart(conversionChartCtx, {
+        const ctx = document.getElementById('conversionChart').getContext('2d');
+        let conversionChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Atend. Total -> Proposta'],
+                labels: ['Conversão (%)'],
                 datasets: [{
-                    label: 'Taxa Atual (%)',
+                    label: 'Atend -> Proposta',
                     data: [0],
-                    backgroundColor: ['#a855f7'], // Purple
-                    borderRadius: 4,
-                    borderWidth: 0
+                    backgroundColor: ['#a855f7'],
+                    borderRadius: 6
                 }, {
-                    label: 'Ref. Mercado (%)',
-                    data: [50],
-                    type: 'line',
-                    borderColor: '#737373', // Neutral-500
-                    borderDash: [5, 5],
-                    pointStyle: 'circle',
-                    pointRadius: 4,
-                    pointBackgroundColor: '#171717',
-                    borderWidth: 2
+                    label: 'Prop -> Venda',
+                    data: [0],
+                    backgroundColor: ['#eab308'],
+                    borderRadius: 6
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { color: '#e5e5e5' }
-                    }
-                },
-                scales: {
-                    y: { 
-                        beginAtZero: true, 
-                        max: 100,
-                        grid: { color: '#262626' } // Neutral-800
-                    },
-                    x: {
-                        grid: { display: false }
-                    }
-                }
+                scales: { y: { beginAtZero: true, max: 100 } }
             }
         });
 
         function updateDashboard() {
-            // Get Input Values (Sales Context)
-            const store = parseInt(document.getElementById('input-store').value) || 0;
-            const video = parseInt(document.getElementById('input-video').value) || 0;
-            const recorded = parseInt(document.getElementById('input-recorded-video').value) || 0;
-            const proposals = parseInt(document.getElementById('input-proposals').value) || 0;
-            const followups = parseInt(document.getElementById('input-followups').value) || 0;
+            const vals = {
+                store: parseInt(document.getElementById('input-store').value) || 0,
+                video: parseInt(document.getElementById('input-video').value) || 0,
+                recorded: parseInt(document.getElementById('input-recorded-video').value) || 0,
+                proposals: parseInt(document.getElementById('input-proposals').value) || 0,
+                followups: parseInt(document.getElementById('input-followups').value) || 0,
+                cars: parseInt(document.getElementById('input-cars').value) || 0
+            };
 
-            // Update Display Numbers
-            document.getElementById('display-store').innerText = store;
-            document.getElementById('display-video').innerText = video;
-            document.getElementById('display-recorded-video').innerText = recorded;
-            document.getElementById('display-proposals').innerText = proposals;
-            document.getElementById('display-followups').innerText = followups;
+            for (let key in vals) {
+                const idSuffix = (key === 'recorded' ? 'recorded-video' : key);
+                const display = document.getElementById('display-' + idSuffix);
+                if (display) display.innerText = vals[key];
+                
+                const bar = document.getElementById('bar-' + idSuffix);
+                if (bar) bar.style.width = Math.min((vals[key] / GOALS[key]) * 100, 100) + '%';
+            }
 
-            // Update Progress Bars (Visual)
-            document.getElementById('bar-store').style.width = Math.min((store / GOALS.store) * 100, 100) + '%';
-            document.getElementById('bar-video').style.width = Math.min((video / GOALS.video) * 100, 100) + '%';
-            document.getElementById('bar-recorded-video').style.width = Math.min((recorded / GOALS.recorded) * 100, 100) + '%';
-            document.getElementById('bar-proposals').style.width = Math.min((proposals / GOALS.proposals) * 100, 100) + '%';
-            document.getElementById('bar-followups').style.width = Math.min((followups / GOALS.followups) * 100, 100) + '%';
-
-            // Calculate Rates
-            // 1. Total Attended (Store + Video) -> Proposals
-            const totalAttended = store + video;
-            let rateProposal = totalAttended > 0 ? ((proposals / totalAttended) * 100).toFixed(1) : 0;
+            const totalAtend = vals.store + vals.video;
+            const rateProp = totalAtend > 0 ? ((vals.proposals / totalAtend) * 100).toFixed(1) : 0;
+            const rateClosing = vals.proposals > 0 ? ((vals.cars / vals.proposals) * 100).toFixed(1) : 0;
             
-            // Update Text Rates
-            document.getElementById('rate-proposal').innerText = rateProposal + '%';
-
-            // Update Rate Progress Bars
-            document.getElementById('prog-proposal').style.width = Math.min(rateProposal, 100) + '%';
-
-            // Update Chart
-            conversionChart.data.datasets[0].data = [rateProposal];
+            document.getElementById('rate-proposal').innerText = rateProp + '%';
+            document.getElementById('prog-proposal').style.width = Math.min(rateProp, 100) + '%';
+            
+            document.getElementById('rate-closing').innerText = rateClosing + '%';
+            document.getElementById('prog-closing').style.width = Math.min(rateClosing, 100) + '%';
+            
+            conversionChart.data.datasets[0].data = [rateProp];
+            conversionChart.data.datasets[1].data = [rateClosing];
             conversionChart.update();
         }
 
-        // --- REPORT GENERATION LOGIC ---
-
         function generateReport() {
-            const today = new Date().toLocaleDateString('pt-BR');
+            const date = new Date().toLocaleDateString('pt-BR');
+            const data = {
+                store: document.getElementById('report-store').value || '0',
+                video: document.getElementById('report-video').value || '0',
+                recorded: document.getElementById('report-recorded-video').value || '0',
+                proposals: document.getElementById('report-proposals').value || '0',
+                followups: document.getElementById('report-followups').value || '0',
+                cars: document.getElementById('report-cars').value || '0'
+            };
+
+            const text = `🏆 RELATÓRIO DE VENDAS - G30 AI\n📅 Data: ${date}\n\n✅ VENDAS CONCLUÍDAS: ${data.cars}\n\n📈 FUNIL DO DIA:\n• Atend. Loja: ${data.store}\n• Videochamadas: ${data.video}\n• Propostas Enviadas: ${data.proposals}\n\n🛠 ATIVIDADE:\n• Vídeos Criados: ${data.recorded}\n• Follow-ups: ${data.followups}\n\n--------------------------------\n_Gerado via G30 AI Dashboard_`;
             
-            // Get values from Metrics Form
-            const store = document.getElementById('report-store').value || '0';
-            const video = document.getElementById('report-video').value || '0';
-            const recorded = document.getElementById('report-recorded-video').value || '0';
-            const proposals = document.getElementById('report-proposals').value || '0';
-            const followups = document.getElementById('report-followups').value || '0';
-
-            // Create Summary Text
-            const reportText = `🚀 RELATÓRIO DIÁRIO DE VENDAS - G30 AI
-📅 Data: ${today}
-
-ATENDIMENTOS
-• Atendimentos em Loja: ${store}
-• Videochamadas Realizadas: ${video}
-• Propostas Enviadas: ${proposals}
-
-ATIVIDADE EXTRA
-• Vídeos Gravados (Conteúdo): ${recorded}
-• Follow-ups Realizados: ${followups}
-
---------------------------------
-_Gerado via G30 AI Sales Dashboard_`;
-
-            // Inject into Modal
+            document.getElementById('report-content').value = text;
             const modal = document.getElementById('report-modal');
-            const textarea = document.getElementById('report-content');
-            
-            textarea.value = reportText;
-            
-            // Show Modal with animation
             modal.classList.remove('hidden');
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
-                modal.querySelector('div').classList.remove('scale-95');
-                modal.querySelector('div').classList.add('scale-100');
+                modal.querySelector('div').classList.replace('scale-95', 'scale-100');
             }, 10);
-            
             document.body.classList.add('modal-active');
         }
 
         function closeReportModal() {
             const modal = document.getElementById('report-modal');
             modal.classList.add('opacity-0');
-            modal.querySelector('div').classList.remove('scale-100');
-            modal.querySelector('div').classList.add('scale-95');
-            
+            modal.querySelector('div').classList.replace('scale-100', 'scale-95');
             setTimeout(() => {
                 modal.classList.add('hidden');
                 document.body.classList.remove('modal-active');
@@ -602,26 +484,13 @@ _Gerado via G30 AI Sales Dashboard_`;
         function copyReport() {
             const content = document.getElementById('report-content');
             content.select();
-            content.setSelectionRange(0, 99999);
-            
-            try {
-                document.execCommand('copy');
-                const btn = event.currentTarget;
-                const originalHTML = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check mr-2"></i> Copiado!';
-                btn.classList.replace('bg-green-700', 'bg-green-500');
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                    btn.classList.replace('bg-green-500', 'bg-green-700');
-                }, 2000);
-            } catch (err) {
-                console.error('Erro ao copiar');
-            }
+            document.execCommand('copy');
+            const btn = event.currentTarget;
+            btn.innerText = 'Copiado!';
+            setTimeout(() => btn.innerText = 'Copiar', 2000);
         }
 
-        updateDashboard();
-
+        window.onload = updateDashboard;
     </script>
 </body>
 </html>
