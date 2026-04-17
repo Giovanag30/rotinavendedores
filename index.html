@@ -221,7 +221,25 @@
                             </div>
                         </div>
 
-                        <!-- 8. Propostas -->
+                        <!-- 8. Vídeos Bolinha -->
+                        <div class="card bg-neutral-900 p-5 rounded-xl border border-neutral-800 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full -mr-10 -mt-10 z-0 transition-transform group-hover:scale-150 duration-500"></div>
+                            <div class="relative z-10">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-neutral-400 font-medium text-xs uppercase tracking-wider">Vídeos Bolinha</h3>
+                                    <i class="fas fa-play-circle text-orange-500 bg-orange-500/10 p-2 rounded-lg border border-orange-500/20"></i>
+                                </div>
+                                <div class="flex items-end gap-2">
+                                    <span id="display-bolinha" class="text-3xl font-bold text-white">0</span>
+                                    <span class="text-xs text-neutral-500 mb-1 font-mono">/ 5</span>
+                                </div>
+                                <div class="w-full bg-neutral-800 rounded-full h-2 mt-4 overflow-hidden">
+                                    <div id="bar-bolinha" class="bg-gradient-to-r from-orange-600 to-orange-400 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9. Propostas -->
                         <div class="card bg-neutral-900 p-5 rounded-xl border border-neutral-800 relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full -mr-10 -mt-10 z-0 transition-transform group-hover:scale-150 duration-500"></div>
                             <div class="relative z-10">
@@ -299,9 +317,16 @@
                                         <input type="number" id="input-recorded-video" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-colors" placeholder="0" oninput="updateDashboard()">
                                     </div>
                                     <div>
+                                        <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Vídeos Bolinha</label>
+                                        <input type="number" id="input-bolinha" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="0" oninput="updateDashboard()">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
                                         <label class="block text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1">Propostas</label>
                                         <input type="number" id="input-proposals" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors" placeholder="0" oninput="updateDashboard()">
                                     </div>
+                                    <div></div>
                                 </div>
                                 <div class="pt-2">
                                     <label class="block text-xs font-bold text-yellow-500 uppercase tracking-wide mb-1">Vendas Concluídas (Carros)</label>
@@ -424,9 +449,16 @@
                                     <input id="report-recorded-video" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
                                 </div>
                                 <div>
+                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Vídeos Bolinha</label>
+                                    <input id="report-bolinha" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
                                     <label class="block text-xs font-medium text-neutral-400 mb-1">Propostas</label>
                                     <input id="report-proposals" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
                                 </div>
+                                <div></div>
                             </div>
                         </div>
                         <div class="md:col-span-2 space-y-4 mt-2">
@@ -484,7 +516,7 @@
             }
         }
 
-        const GOALS = { leads: 20, calls: 10, appointments: 5, visits: 3, store: 5, video: 3, proposals: 2, recorded: 2, cars: 1 };
+        const GOALS = { leads: 20, calls: 10, appointments: 5, visits: 3, store: 5, video: 3, proposals: 2, recorded: 2, bolinha: 5, cars: 1 };
 
         Chart.defaults.color = '#a3a3a3';
         Chart.defaults.borderColor = '#262626';
@@ -522,6 +554,7 @@
                 store: parseInt(document.getElementById('input-store').value) || 0,
                 video: parseInt(document.getElementById('input-video').value) || 0,
                 recorded: parseInt(document.getElementById('input-recorded-video').value) || 0,
+                bolinha: parseInt(document.getElementById('input-bolinha').value) || 0,
                 proposals: parseInt(document.getElementById('input-proposals').value) || 0,
                 cars: parseInt(document.getElementById('input-cars').value) || 0
             };
@@ -560,11 +593,12 @@
                 store: document.getElementById('report-store').value || '0',
                 video: document.getElementById('report-video').value || '0',
                 recorded: document.getElementById('report-recorded-video').value || '0',
+                bolinha: document.getElementById('report-bolinha').value || '0',
                 proposals: document.getElementById('report-proposals').value || '0',
                 cars: document.getElementById('report-cars').value || '0'
             };
 
-            const text = `🏆 RELATÓRIO DE VENDAS - G30 AI\n📅 Data: ${date}\n\n✅ VENDAS CONCLUÍDAS: ${data.cars}\n\n🎯 INÍCIO DE FUNIL:\n• Leads Recebidos: ${data.leads}\n• Ligações Conversadas: ${data.calls}\n• Agendamentos: ${data.appointments}\n• Visitas Feitas: ${data.visits}\n\n📈 PIPELINE DO DIA:\n• Atend. Loja: ${data.store}\n• Videochamadas: ${data.video}\n• Propostas Enviadas: ${data.proposals}\n\n🛠 ATIVIDADE EXTRA:\n• Vídeos Criados: ${data.recorded}\n\n--------------------------------\n_Gerado via G30 AI Dashboard_`;
+            const text = `🏆 RELATÓRIO DE VENDAS - G30 AI\n📅 Data: ${date}\n\n✅ VENDAS CONCLUÍDAS: ${data.cars}\n\n🎯 INÍCIO DE FUNIL:\n• Leads Recebidos: ${data.leads}\n• Ligações Conversadas: ${data.calls}\n• Agendamentos: ${data.appointments}\n• Visitas Feitas: ${data.visits}\n\n📈 PIPELINE DO DIA:\n• Atend. Loja: ${data.store}\n• Videochamadas: ${data.video}\n• Propostas Enviadas: ${data.proposals}\n\n🛠 ATIVIDADE EXTRA:\n• Vídeos Criados: ${data.recorded}\n• Vídeos Bolinha: ${data.bolinha}\n\n--------------------------------\n_Gerado via G30 AI Dashboard_`;
             
             document.getElementById('report-content').value = text;
             const modal = document.getElementById('report-modal');
