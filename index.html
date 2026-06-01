@@ -54,9 +54,6 @@
                 <a href="#" onclick="switchTab('routine')" id="nav-routine" class="nav-item flex items-center p-3 rounded-lg hover:bg-neutral-800 text-neutral-400 transition hover:text-green-400">
                     <i class="fas fa-clock w-6"></i> Rotina Diária
                 </a>
-                <a href="#" onclick="switchTab('metrics')" id="nav-metrics" class="nav-item flex items-center p-3 rounded-lg hover:bg-neutral-800 text-neutral-400 transition hover:text-green-400">
-                    <i class="fas fa-clipboard-list w-6"></i> Registro Diário
-                </a>
             </nav>
             <div class="p-4 border-t border-neutral-800 bg-neutral-900/50">
                 <div class="flex items-center gap-3">
@@ -75,7 +72,7 @@
             <!-- Mobile Header -->
             <div class="md:hidden bg-black border-b border-neutral-800 text-white p-4 flex justify-between items-center">
                 <img src="https://raw.githubusercontent.com/Giovanag30/g30/8064860730a55365eaf57019917177446979d57b/g30.jpg" alt="G30 AI" class="h-10 w-auto rounded-md" onerror="this.src='https://via.placeholder.com/40?text=G30'">
-                <button class="text-white"><i class="fas fa-bars"></i></button>
+                <button class="text-white" onclick="document.querySelector('aside').classList.toggle('hidden')"><i class="fas fa-bars"></i></button>
             </div>
 
             <div class="p-6 md:p-8 max-w-7xl mx-auto w-full">
@@ -257,7 +254,7 @@
                             </div>
                         </div>
 
-                        <!-- 9. Carros Vendidos -->
+                        <!-- 10. Carros Vendidos -->
                         <div class="card bg-neutral-900 p-5 rounded-xl border border-yellow-700/30 relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-500/10 rounded-full -mr-10 -mt-10 z-0 transition-transform group-hover:scale-150 duration-500"></div>
                             <div class="relative z-10">
@@ -332,6 +329,11 @@
                                     <label class="block text-xs font-bold text-yellow-500 uppercase tracking-wide mb-1">Vendas Concluídas (Carros)</label>
                                     <input type="number" id="input-cars" class="w-full bg-neutral-950 border border-yellow-700/50 rounded-lg p-3 text-white focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors font-bold text-lg" placeholder="0" oninput="updateDashboard()">
                                 </div>
+                                <div class="pt-4 border-t border-neutral-800 mt-2">
+                                    <button type="button" onclick="generateReport()" class="w-full bg-gradient-to-r from-green-700 to-green-600 text-white font-bold py-3 rounded-lg hover:from-green-600 hover:to-green-500 transition shadow-lg flex items-center justify-center gap-2">
+                                        <i class="fas fa-file-alt"></i> Gerar Relatório Diário
+                                    </button>
+                                </div>
                             </form>
                         </div>
 
@@ -386,7 +388,6 @@
                                     <p class="text-sm text-neutral-400">Revisar CRM, preparar reuniões do dia e confirmar agenda.</p>
                                 </div>
                             </div>
-                            <!-- Você pode adicionar mais itens na timeline conforme necessário -->
                             <div class="flex flex-col md:flex-row gap-4 group">
                                 <div class="flex items-center gap-4 md:w-48 flex-shrink-0">
                                     <div class="w-4 h-4 rounded-full bg-neutral-600 border-4 border-neutral-900 ml-1 md:ml-6 z-10"></div>
@@ -394,86 +395,11 @@
                                 </div>
                                 <div class="bg-neutral-950 p-4 rounded-lg border border-neutral-800 flex-1 hover:border-neutral-500 transition">
                                     <h4 class="font-bold text-white">Prospecção Ativa</h4>
-                                    <p class="text-sm text-neutral-400">Ligaçōes frias, envio de e-mails e contato inicial com leads.</p>
+                                    <p class="text-sm text-neutral-400">Ligações frias, envio de e-mails e contato inicial com leads.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- SECTION: METRICS -->
-                <div id="metrics-section" class="hidden space-y-6 animate-fade-in">
-                    <header class="border-b border-neutral-800 pb-4 mb-6">
-                        <h2 class="text-3xl font-bold text-white">Registro Diário</h2>
-                        <p class="text-neutral-400">Consolidação final de resultados.</p>
-                    </header>
-                    <form class="bg-neutral-900 p-8 rounded-xl border border-neutral-800 grid grid-cols-1 md:grid-cols-2 gap-6 shadow-lg">
-                        <div class="space-y-4">
-                            <h3 class="font-bold text-blue-500 border-b border-neutral-700 pb-2 uppercase text-sm tracking-wide">Funil Inicial</h3>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Leads Recebidos</label>
-                                    <input id="report-leads" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Ligações</label>
-                                    <input id="report-calls" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Agendamentos</label>
-                                    <input id="report-appointments" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Visitas</label>
-                                    <input id="report-visits" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <h3 class="font-bold text-purple-500 border-b border-neutral-700 pb-2 uppercase text-sm tracking-wide">Atendimentos (Pipeline)</h3>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Loja</label>
-                                    <input id="report-store" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Videochamadas</label>
-                                    <input id="report-video" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Vídeos</label>
-                                    <input id="report-recorded-video" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Vídeos Bolinha</label>
-                                    <input id="report-bolinha" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-neutral-400 mb-1">Propostas</label>
-                                    <input id="report-proposals" type="number" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2.5 text-white" placeholder="0">
-                                </div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <div class="md:col-span-2 space-y-4 mt-2">
-                            <h3 class="font-bold text-yellow-500 border-b border-neutral-700 pb-2 uppercase text-sm tracking-wide">Resultado Final</h3>
-                            <div>
-                                <label class="block text-xs font-medium text-neutral-400 mb-1">Carros Vendidos</label>
-                                <input id="report-cars" type="number" class="w-full bg-neutral-950 border border-yellow-700/50 rounded-lg p-2.5 text-white font-bold" placeholder="0">
-                            </div>
-                        </div>
-                        <div class="md:col-span-2 pt-4">
-                            <button type="button" onclick="generateReport()" class="w-full bg-gradient-to-r from-green-700 to-green-600 text-white font-bold py-3 rounded-lg hover:from-green-600 hover:to-green-500 transition shadow-lg flex items-center justify-center gap-2">
-                                <i class="fas fa-file-alt"></i> Gerar Relatório de Vendas
-                            </button>
-                        </div>
-                    </form>
                 </div>
 
             </div>
@@ -499,7 +425,7 @@
 
     <script>
         function switchTab(tabId) {
-            ['dashboard', 'routine', 'metrics'].forEach(id => {
+            ['dashboard', 'routine'].forEach(id => {
                 document.getElementById(id + '-section').classList.add('hidden');
                 const btn = document.getElementById('nav-' + id);
                 if (btn) {
@@ -586,16 +512,16 @@
         function generateReport() {
             const date = new Date().toLocaleDateString('pt-BR');
             const data = {
-                leads: document.getElementById('report-leads').value || '0',
-                calls: document.getElementById('report-calls').value || '0',
-                appointments: document.getElementById('report-appointments').value || '0',
-                visits: document.getElementById('report-visits').value || '0',
-                store: document.getElementById('report-store').value || '0',
-                video: document.getElementById('report-video').value || '0',
-                recorded: document.getElementById('report-recorded-video').value || '0',
-                bolinha: document.getElementById('report-bolinha').value || '0',
-                proposals: document.getElementById('report-proposals').value || '0',
-                cars: document.getElementById('report-cars').value || '0'
+                leads: document.getElementById('input-leads').value || '0',
+                calls: document.getElementById('input-calls').value || '0',
+                appointments: document.getElementById('input-appointments').value || '0',
+                visits: document.getElementById('input-visits').value || '0',
+                store: document.getElementById('input-store').value || '0',
+                video: document.getElementById('input-video').value || '0',
+                recorded: document.getElementById('input-recorded-video').value || '0',
+                bolinha: document.getElementById('input-bolinha').value || '0',
+                proposals: document.getElementById('input-proposals').value || '0',
+                cars: document.getElementById('input-cars').value || '0'
             };
 
             const text = `🏆 RELATÓRIO DE VENDAS - G30 AI\n📅 Data: ${date}\n\n✅ VENDAS CONCLUÍDAS: ${data.cars}\n\n🎯 INÍCIO DE FUNIL:\n• Leads Recebidos: ${data.leads}\n• Ligações Conversadas: ${data.calls}\n• Agendamentos: ${data.appointments}\n• Visitas Feitas: ${data.visits}\n\n📈 PIPELINE DO DIA:\n• Atend. Loja: ${data.store}\n• Videochamadas: ${data.video}\n• Propostas Enviadas: ${data.proposals}\n\n🛠 ATIVIDADE EXTRA:\n• Vídeos Criados: ${data.recorded}\n• Vídeos Bolinha: ${data.bolinha}\n\n--------------------------------\n_Gerado via G30 AI Dashboard_`;
